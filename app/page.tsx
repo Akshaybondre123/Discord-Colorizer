@@ -56,14 +56,14 @@ export default function DiscordColoredTextGenerator() {
 
     const rawCode = `\`\`\`ansi\n[${formattingCodes}m${selectedText}[0m\n\`\`\``
 
-    // Create new segments
+    
     const newSegments = [...formattedSegments]
 
-    // Find if there are any segments that overlap with our selection
+    
     const segmentIndex = 0
     const currentPosition = 0
 
-    // Add text before selection if needed
+   
     if (start > 0 && formattedSegments.length === 0) {
       newSegments.push({
         text: text.substring(0, start),
@@ -71,7 +71,7 @@ export default function DiscordColoredTextGenerator() {
       })
     }
 
-    // Add the formatted segment
+    
     newSegments.push({
       text: selectedText,
       isFormatted: true,
@@ -81,7 +81,7 @@ export default function DiscordColoredTextGenerator() {
       rawCode,
     })
 
-    // Add text after selection if needed
+    
     if (end < text.length) {
       newSegments.push({
         text: text.substring(end),
@@ -91,7 +91,7 @@ export default function DiscordColoredTextGenerator() {
 
     setFormattedSegments(newSegments)
 
-    // Update the visible text (without ANSI codes)
+    
     const newVisibleText = newSegments.map((segment) => segment.text).join("")
     setText(newVisibleText)
 
@@ -102,7 +102,7 @@ export default function DiscordColoredTextGenerator() {
   }
 
   const copyToClipboard = () => {
-    // Generate the raw Discord text with ANSI codes
+   
     const discordText = formattedSegments
       .map((segment) => (segment.isFormatted ? segment.rawCode : segment.text))
       .join("")
@@ -163,7 +163,7 @@ export default function DiscordColoredTextGenerator() {
             </Button>
           </div>
 
-          {/* Text editor */}
+         
           <Textarea
             ref={textareaRef}
             placeholder="Type your message here..."
@@ -171,7 +171,7 @@ export default function DiscordColoredTextGenerator() {
             value={text}
             onChange={(e) => {
               setText(e.target.value)
-              // Reset formatting when text is manually edited
+             
               if (formattedSegments.length > 0) {
                 setFormattedSegments([
                   {
@@ -183,7 +183,7 @@ export default function DiscordColoredTextGenerator() {
             }}
           />
 
-          {/* Formatted text display */}
+          
           <div className="min-h-[100px] bg-[#2f3136] rounded-md p-4 whitespace-pre-wrap">
             <h3 className="text-sm font-medium mb-2">Formatted Preview:</h3>
             <div>
